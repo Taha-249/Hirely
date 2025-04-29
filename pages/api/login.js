@@ -14,7 +14,7 @@ export default function handler(req, res) {
   if (username === 'admin' && password === 'admin') {
     const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
 
-    res.setHeader('Set-Cookie', `authToken=${token}; HttpOnly; Path=/; Max-Age=3600`);
+    res.setHeader('Set-Cookie', `authToken=${token}; HttpOnly; Path=/; Max-Age=60`);
     return res.status(200).json({ message: 'Login successful' });
   }
 

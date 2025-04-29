@@ -1,10 +1,10 @@
 // middleware.js
 import { NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
+import { jwtVerify } from 'jose';
 
-const SECRET = 'your-secret-key';
+const SECRET = new TextEncoder().encode('your-secret-key'); // or use process.env.JWT_SECRET
 
-export function middleware(request) {
+export async function middleware(request) {
   const token = request.cookies.get('authToken')?.value;
 
   if (!token) {
@@ -12,10 +12,10 @@ export function middleware(request) {
   }
 
   try {
-    jwt.verify(token, SECRET);
+    await jwtVerify(token, SECRET);
     return NextResponse.next();
   } catch (err) {
-    console.error('Invalid Token', err);
+    console.error('Invalid Token Error:', err);
     return NextResponse.redirect(new URL('/login', request.url));
   }
 }
