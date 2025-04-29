@@ -18,7 +18,6 @@ export default function LoginForm() {
     });
 
     if (res.ok) {
-      // ✅ redirect to protected page
       router.push('/applyJob');
     } else {
       const data = await res.json();
@@ -27,24 +26,34 @@ export default function LoginForm() {
   }
 
   return (
-    <form className="space-y-4">
-      <input 
-        type="text" 
-        placeholder="user name" 
-        value={username} 
-        onChange={(e) => setUsername(e.target.value)}
-        className="border p-2 w-full"
-      />
-      <input 
-        type="password" 
-        placeholder="Password" 
-        value={password} 
-        onChange={(e) => setPassword(e.target.value)}
-        className="border p-2 w-full"
-      />
-      <button onClick={handleSubmit}>Login In</button>
-      <Link href={'/signup'}> Donot have account? Click to Sign Up</Link>
-      
+    <form onSubmit={handleSubmit} className="container mt-5" style={{ maxWidth: '400px' }}>
+      <h2 className="mb-4 text-center">Login</h2>
+      {error && <div className="alert alert-danger">{error}</div>}
+
+      <div className="mb-3">
+        <input 
+          type="text" 
+          className="form-control" 
+          placeholder="User Name" 
+          value={username}
+          onChange={(e) => setUsername(e.target.value)} 
+        />
+      </div>
+
+      <div className="mb-3">
+        <input 
+          type="password" 
+          className="form-control" 
+          placeholder="Password" 
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} 
+        />
+      </div>
+
+      <button type="submit" className="btn btn-primary w-100">Login</button>
+      <p className="mt-3 text-center">
+        <Link href="/signup">Don't have an account? Sign up</Link>
+      </p>
     </form>
   );
 }

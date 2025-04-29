@@ -16,57 +16,68 @@ export default function SignupForm() {
     const res = await fetch('/api/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-        role
-      })
+      body: JSON.stringify({ name, email, password, role }),
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      alert("Signup successful!");
+      alert('Signup successful!');
       router.push('/login');
     } else {
-      alert(data.message || "Signup failed.");
+      alert(data.message || 'Signup failed.');
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input 
-        type="text" 
-        placeholder="Name" 
-        value={name} 
-        onChange={(e) => setName(e.target.value)}
-        className="border p-2 w-full"
-      />
-      <input 
-        type="email" 
-        placeholder="Email" 
-        value={email} 
-        onChange={(e) => setEmail(e.target.value)}
-        className="border p-2 w-full"
-      />
-      <input 
-        type="password" 
-        placeholder="Password" 
-        value={password} 
-        onChange={(e) => setPassword(e.target.value)}
-        className="border p-2 w-full"
-      />
-      <select 
-        value={role} 
-        onChange={(e) => setRole(e.target.value)} 
-        className="border p-2 w-full"
-      >
-        <option value="user">User</option>
-        <option value="company">Company</option>
-      </select>
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit</button>
-      <Link href={'/login'}>Already have an account? Click to Sign In</Link>
+    <form onSubmit={handleSubmit} className="container mt-5" style={{ maxWidth: '500px' }}>
+      <h2 className="mb-4 text-center">Sign Up</h2>
+
+      <div className="mb-3">
+        <input 
+          type="text" 
+          className="form-control" 
+          placeholder="Name" 
+          value={name}
+          onChange={(e) => setName(e.target.value)} 
+        />
+      </div>
+
+      <div className="mb-3">
+        <input 
+          type="email" 
+          className="form-control" 
+          placeholder="Email" 
+          value={email}
+          onChange={(e) => setEmail(e.target.value)} 
+        />
+      </div>
+
+      <div className="mb-3">
+        <input 
+          type="password" 
+          className="form-control" 
+          placeholder="Password" 
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} 
+        />
+      </div>
+
+      <div className="mb-3">
+        <select 
+          className="form-select"
+          value={role}
+          onChange={(e) => setRole(e.target.value)} 
+        >
+          <option value="user">User</option>
+          <option value="company">Company</option>
+        </select>
+      </div>
+
+      <button type="submit" className="btn btn-success w-100">Sign Up</button>
+      <p className="mt-3 text-center">
+        <Link href="/login">Already have an account? Sign in</Link>
+      </p>
     </form>
   );
 }

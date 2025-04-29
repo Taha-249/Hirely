@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function ApplyPage({ params }) {
-//   const { id: jobId } = params;
   const router = useRouter();
-
   const [resumeFile, setResumeFile] = useState(null);
   const [message, setMessage] = useState('');
   const [contactInfo, setContactInfo] = useState('');
@@ -13,6 +11,7 @@ export default function ApplyPage({ params }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     if (!resumeFile) {
       setFeedback({ message: 'Please upload your resume.', type: 'error' });
       return;
@@ -22,15 +21,14 @@ export default function ApplyPage({ params }) {
     formData.append('resume', resumeFile);
     formData.append('message', message);
     formData.append('contactInfo', contactInfo);
-    // formData.append('jobId', jobId);
 
     try {
       const res = await fetch('/api/applications', {
         method: 'POST',
         body: formData,
         headers: {
-          'authorization': `Bearer ${localStorage.getItem('token')}` // Assumes you stored JWT in localStorage
-        }
+          'authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
       });
 
       const data = await res.json();
@@ -46,56 +44,50 @@ export default function ApplyPage({ params }) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
-      <h1 className="text-2xl mb-6 text-center">Apply for Job</h1>
+    <div className="container mt-5" style={{ maxWidth: '600px' }}>
+      <h2 className="text-center mb-4">Apply for Job</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      {feedback.message && (
+        <div className={`alert ${feedback.type === 'success' ? 'alert-success' : 'alert-danger'}`}>
+          {feedback.message}
+        </div>
+      )}
 
-        <div>
-          <label className="block mb-1">Upload Resume (PDF)</label>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Upload Resume (PDF)</label>
           <input 
             type="file" 
             accept="application/pdf" 
-            onChange={(e) => setResumeFile(e.target.files[0])}
-            className="block"
+            className="form-control"
+            onChange={(e) => setResumeFile(e.target.files[0])} 
           />
-          {resumeFile && <p className="text-green-600 mt-1">Selected: {resumeFile.name}</p>}
+          {resumeFile && <small className="text-success">Selected: {resumeFile.name}</small>}
         </div>
 
-        <div>
-          <label className="block mb-1">Message / Cover Letter</label>
+        <div className="mb-3">
+          <label className="form-label">Message / Cover Letter</label>
           <textarea 
+            className="form-control" 
+            rows="4"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Write a short message..."
-            className="border p-2 w-full"
-            rows="4"
           />
         </div>
 
-        <div>
-          <label className="block mb-1">Your Contact Info (Phone/Email)</label>
+        <div className="mb-3">
+          <label className="form-label">Contact Info</label>
           <input 
-            type="text"
+            type="text" 
+            className="form-control"
             value={contactInfo}
             onChange={(e) => setContactInfo(e.target.value)}
             placeholder="example@gmail.com / +123456789"
-            className="border p-2 w-full"
           />
         </div>
 
-        <button 
-          type="submit" 
-          className="bg-blue-500 text-white px-4 py-2 rounded w-full"
-        >
-          Submit Application
-        </button>
-
-        {feedback.message && (
-          <p className={`mt-4 text-center ${feedback.type === 'success' ? 'text-green-500' : 'text-red-500'}`}>
-            {feedback.message}
-          </p>
-        )}
+        <button type="submit" className="btn btn-primary w-100">Submit Application</button>
       </form>
     </div>
   );
