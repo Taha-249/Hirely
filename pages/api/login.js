@@ -11,7 +11,7 @@ export default function handler(req, res) {
   const { username, password } = req.body;
 
   // Fake login validation
-  if (username === 'admin' && password === 'password123') {
+  if (username === 'admin' && password === 'admin') {
     const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
 
     res.setHeader('Set-Cookie', `authToken=${token}; HttpOnly; Path=/; Max-Age=3600`);

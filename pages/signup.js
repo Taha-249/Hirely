@@ -12,17 +12,31 @@ export default function SignupForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // const { success, message } = await register(email, password, role);
-    // if (success) {
-    //   router.push('/dashboard');
-    // } else {
-    //   setError(message);
-    // }
+
+    const res = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        role
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Signup successful!");
+      router.push('/login');
+    } else {
+      alert(data.message || "Signup failed.");
+    }
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-        <input 
+      <input 
         type="text" 
         placeholder="Name" 
         value={name} 
@@ -51,8 +65,8 @@ export default function SignupForm() {
         <option value="user">User</option>
         <option value="company">Company</option>
       </select>
-      <button onClick={handleSubmit}>Submit</button>
-      <Link href={'/login'}> Already has account? Click to Sign In</Link>
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit</button>
+      <Link href={'/login'}>Already have an account? Click to Sign In</Link>
     </form>
   );
 }
