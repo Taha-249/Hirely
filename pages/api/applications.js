@@ -8,7 +8,7 @@ export const config = {
   },
 };
 
-const uri = 'YOUR_MONGO_URI_HERE';
+const uri = 'mongodb+srv://d6989607:Ly2Ish2OpK3R9Y16@hirely.6b2mswq.mongodb.net/?retryWrites=true&w=majority&appName=Hirely';
 const client = new MongoClient(uri);
 
 export default async function handler(req, res) {
