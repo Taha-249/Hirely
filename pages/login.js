@@ -18,7 +18,7 @@ export default function LoginForm() {
     });
 
     if (res.ok) {
-      router.push('/applyJob');
+      router.push('/applyJob/1');
     } else {
       const data = await res.json();
       setError(data.message);
