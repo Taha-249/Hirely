@@ -1,8 +1,10 @@
+// JobCard.jsx
 import { useRouter } from 'next/router';
 import styles from './jobcard.module.css';
 
-export default function JobCard({ job }) {
-    const router = useRouter();
+export default function JobCard({ job, basePath = '/jobs' }) {
+  const router = useRouter();
+
   return (
     <div key={job._id} className={styles.card}>
       <div className={styles.header}>
@@ -19,7 +21,10 @@ export default function JobCard({ job }) {
       </div>
 
       <div className={styles['button-container']}>
-        <button className={styles.button} onClick={()=>{router.push(`/jobs/${job._id}`)}}>
+        <button
+          className={styles.button}
+          onClick={() => router.push(`${basePath}/${job._id}`)}
+        >
           View Details
         </button>
       </div>
