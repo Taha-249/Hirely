@@ -37,4 +37,9 @@
     justify-content: space-between;
     margin-top: 1rem; /* Tailwind: mt-4 */
   }
-  
+  .loading {
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #c4c8c9;
+    text-align: center;
+  }

@@ -9,7 +9,7 @@ export default function CompanyJobsPage() {
     refreshInterval: 5000,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className={styles.loading}>Loading...</div>;
   if (error) return <div>Failed to load jobs</div>;
 
   return (
