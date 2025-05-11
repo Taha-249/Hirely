@@ -1,0 +1,53 @@
+.filterContainer {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #ffffff;
+  
+}
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.filterSection {
+  margin-bottom: 1rem;
+}
+.filterLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-top: 10px;
+  
+}
+.rangeInput {
+  width: 100%;
+}
+.rangeValue {
+  margin-top: 0.5rem;
+}
+.searchInput {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+}
+/* Update any text elements to have black color */
+.filterContainer {
+  color: black;
+}
+
+.filterLabel {
+  color: black;
+}
+
+.filterSectionTitle {
+  color: black;
+}
+
+.rangeValue {
+  color: black;
+}
+
+.searchInput {
+  color: rgb(248, 248, 248);
+}

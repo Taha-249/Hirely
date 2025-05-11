@@ -1,0 +1,14 @@
+.jobsLayout {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: flex-start;
+}
+
+.filterColumn {
+  width: 300px;
+}
+
+.jobsColumn {
+  flex: 1;
+}

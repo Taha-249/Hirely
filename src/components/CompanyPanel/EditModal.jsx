@@ -9,13 +9,15 @@ export default function EditModal({ job }) {
   const [location, setLocation] = useState(job.location);
   const [category, setCategory] = useState(job.category);
   const [salary, setSalary] = useState(job.salary);
+  const [workmode, setWorkmode] = useState(job.workmode);
+  const [experience, setExperience] = useState(job.experience);
 
   const handleUpdate = async () => {
     try {
       const response = await fetch(`/api/jobs/${job._id}/edit`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, company, location, category, salary }),
+        body: JSON.stringify({ title, company, location, category, salary,workmode,experience }),
       });
 
       const data = await response.json();
@@ -71,6 +73,18 @@ export default function EditModal({ job }) {
               onChange={(e) => setSalary(e.target.value)}
               className={styles.input}
               placeholder="Salary"
+            />
+            <input
+              value={workmode}
+              onChange={(e) => setWorkmode(e.target.value)}
+              className={styles.input}
+              placeholder="workmode"
+            />
+            <input
+              value={experience}
+              onChange={(e) => setExperience(e.target.value)}
+              className={styles.input}
+              placeholder="Experience"
             />
 
             <div className={styles['button-container']}>
