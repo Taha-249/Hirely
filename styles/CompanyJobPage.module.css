@@ -1,0 +1,36 @@
+/* CompanyJobsPage.module.css */
+
+.container {
+    padding: 1.5rem; /* Tailwind: p-6 */
+  }
+  
+  .title {
+    font-size: 1.5rem; /* Tailwind: text-2xl */
+    font-weight: 700;  /* Tailwind: font-bold */
+    margin-bottom: 1rem; /* Tailwind: mb-4 */
+  }
+  
+  .grid {
+    margin-top: 2.5rem; /* Tailwind: mt-10 */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .loading {
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #c4c8c9;
+    text-align: center;
+  }

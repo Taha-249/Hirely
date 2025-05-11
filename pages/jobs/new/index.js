@@ -8,6 +8,8 @@ export default function CreateJobPage() {
     location: '',
     category: '',
     salary: '',
+    workmode: '',
+    experience: '',
     isOpen: true,
   });
 
@@ -42,6 +44,8 @@ export default function CreateJobPage() {
           location: '',
           category: '',
           salary: '',
+          workmode: '',
+          experience: '',
           isOpen: true,
         });
       } else {
@@ -58,7 +62,7 @@ export default function CreateJobPage() {
       {message && <p className={styles.message}>{message}</p>}
 
       <form onSubmit={handleSubmit}>
-        {['title', 'company', 'location', 'category', 'salary'].map((field) => (
+        {['title', 'company', 'location', 'category', 'salary', 'workmode', 'experience'].map((field) => (
           <div className={styles.formGroup} key={field}>
             <label className={styles.label}>
               {field[0].toUpperCase() + field.slice(1)}

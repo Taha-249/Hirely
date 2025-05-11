@@ -19,11 +19,14 @@ export default function JobDetails({ job, error }) {
       <div className={styles.details}>
         <p><strong>Category:</strong> {job.category}</p>
         <p><strong>Salary:</strong> {job.salary}</p>
+        <p><strong>Work Mode:</strong> {job.workmode}</p>
+        <p><strong>Experience Level:</strong> {job.experience}</p>
       </div>
 
       <div className={styles.description}>
+        <p><strong>Job Description:</strong></p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis sagittis nulla. Pellentesque habitant morbi tristique senectus.</p>
-        <p>Responsibilities include:</p>
+        <p><strong>Responsibilities include:</strong></p>
         <ul>
           <li>Building and maintaining frontend applications</li>
           <li>Collaborating with cross-functional teams</li>

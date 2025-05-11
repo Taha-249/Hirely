@@ -35,3 +35,14 @@ export async function getJobByID(id) {
     .findOne({_id: new ObjectId(id)})
     return job
 }
+
+
+export async function getJobsByCompany(companyId) {
+  const client = await clientPromise;
+  const db = client.db();
+  const jobs = await db
+    .collection('Jobs')
+    .find({ createdBy: companyId })
+    .toArray();
+  return jobs;
+}

@@ -56,4 +56,9 @@
     text-align: center;
     color: #e53e3e;
   }
-  
+  .loading {
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #c4c8c9;
+    text-align: center;
+  }
