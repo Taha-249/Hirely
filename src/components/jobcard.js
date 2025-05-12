@@ -9,7 +9,7 @@ export default function JobCard({ job, basePath = '/jobs' }) {
       <div className={styles.header}>
         <div className={styles.jobTitle}>
           <h2>{job.title}</h2>
-          <p>{job.company}</p>
+          <p>{job.companyTitle}</p>
         </div>
 
         <div className={styles.jobTypeAndSalary}>

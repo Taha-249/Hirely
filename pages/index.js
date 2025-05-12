@@ -1,4 +1,3 @@
-// pages/index.js
 import Link from 'next/link';
 import styles from '@/styles/Home.module.css';
 
@@ -20,4 +19,10 @@ export default function LandingPage() {
       </section>
     </main>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {}
+  };
 }

@@ -15,7 +15,6 @@ export default function JobsPage({ initialJobs, totalPages }) {
     jobTypes: [],
     workMode: [],
     experience: [],
-    salary: 100000,
   });
 
   const fetchJobs = async (pageNumber, currentSearchTerm = '', currentFilters = filters) => {
@@ -103,7 +102,7 @@ export default function JobsPage({ initialJobs, totalPages }) {
               <>
                 <div className={styles.jobCardsContainer}>
                   {jobs.map((job) => (
-                    <JobCard key={job.id} job={job} />
+                    <JobCard key={job._id} job={job} />
                   ))}
                 </div>
 
@@ -135,7 +134,7 @@ export default function JobsPage({ initialJobs, totalPages }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const res = await fetch("http://localhost:3000/api/jobs?page=1&limit=10");
     if (!res.ok) throw new Error("Failed to fetch");
@@ -148,6 +147,7 @@ export async function getServerSideProps() {
         initialJobs: data.jobs,
         totalPages: Math.ceil(totalJobs / 10),
       },
+      revalidate: 86400,
     };
   } catch (error) {
     console.error("Error fetching jobs:", error);

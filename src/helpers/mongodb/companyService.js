@@ -2,7 +2,7 @@ import clientPromise from './connect';
 import { ObjectId } from 'mongodb';
 
 // Get all companies with pagination
-export async function getAllCompanies(page = 1, limit = 10) {
+export async function getAllCompanies(page = 1, limit = 20) {
   const client = await clientPromise;
   const db = client.db();
 

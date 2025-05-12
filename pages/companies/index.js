@@ -12,12 +12,12 @@ export default function CompaniesListPage({ companies = [] }) {
           companies.map((company, ind) => (
             <div key={ind} className={styles.card}>
               <div className={styles.logoContainer}>
-                <img src={company.logo} alt={`${company.title} logo`} />
+                <img src={company.logo} alt={`${company.companyTitle} logo`} />
               </div>
 
               <div className={styles.cardContent}>
                 <div className={styles.cardHeader}>
-                  <h2>{company.title}</h2>
+                  <h2>{company.companyTitle}</h2>
                   <span className={styles.rating}>⭐ {company.rating}</span>
                 </div>
                 <p className={styles.location}>{company.location}</p>
