@@ -1,6 +1,9 @@
-import styles from '@/styles/JobDetail.module.css';
+import { useState } from "react";
+import styles from "@/styles/JobDetail.module.css";
 
 export default function JobDetails({ job, error }) {
+  const [showDescription, setShowDescription] = useState(true); // Toggle between description and details
+
   if (error) {
     return <div className={styles.error}>Error: {error}</div>;
   }
@@ -9,31 +12,80 @@ export default function JobDetails({ job, error }) {
     return <div className={styles.notFound}>Job not found.</div>;
   }
 
+  const handleToggleView = () => {
+    setShowDescription((prevState) => !prevState);
+  };
+
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>{job.title}</h1>
-      <p className={styles.company}>{job.company} • {job.location}</p>
+    <div className={styles.PageWrapper}>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <h1 className={styles.title}>{job.title}</h1>
+            <p className={styles.company}>
+              {job.company} • {job.location}
+            </p>
 
-      {!job.isOpen && <span className={styles.closed}>This position is closed</span>}
+            <div className={styles.headerRight}>
+              <span className={styles.jobType}>{job.jobType}</span>
+              <span className={styles.salary}>{job.salary}</span>
+            </div>
+          </div>
 
-      <div className={styles.details}>
-        <p><strong>Category:</strong> {job.category}</p>
-        <p><strong>Salary:</strong> {job.salary}</p>
-        <p><strong>Work Mode:</strong> {job.workmode}</p>
-        <p><strong>Experience Level:</strong> {job.experience}</p>
+          <div className={styles.tags}>
+            {job.tags.map((tag, index) => (
+              <span key={index} className={styles.tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <hr className={styles.divider} />
+
+          <div className={styles.jobInfo}>
+            <p>
+              <strong>Category:</strong> {job.category}
+            </p>
+            <p>
+              <strong>Work Mode:</strong> {job.workMode}
+            </p>
+            <p>
+              <strong>Experience Level:</strong> {job.expLevel}
+            </p>
+
+            {!job.isOpen ? (
+              <span className={styles.status}>Closed</span>
+            ) : (
+              <div className={styles.toggleButtons}>
+                <button onClick={() => {}} className={styles.toggleButton}>
+                  Apply Now
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className={styles.toggleButtons}>
+            <button onClick={handleToggleView} className={styles.toggleButton}>
+              {showDescription ? "Show Details" : "Show Description"}
+            </button>
+          </div>
+
+          {showDescription ? (
+            <div className={styles.description}>
+              <p>
+                <strong>Job Description:</strong>
+              </p>
+              <p>{job.description || "No description available."}</p>
+            </div>
+          ) : (
+            <div className={styles.details}>
+              <p>
+                <strong>Job Details:</strong>
+              </p>
+              <p>{job.details || "No details available."}</p>
+            </div>
+          )}
+        </div>
       </div>
-
-      <div className={styles.description}>
-        <p><strong>Job Description:</strong></p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis sagittis nulla. Pellentesque habitant morbi tristique senectus.</p>
-        <p><strong>Responsibilities include:</strong></p>
-        <ul>
-          <li>Building and maintaining frontend applications</li>
-          <li>Collaborating with cross-functional teams</li>
-          <li>Ensuring UI/UX consistency</li>
-        </ul>
-      </div>
-    </div>
   );
 }
 
@@ -43,7 +95,7 @@ export async function getServerSideProps(context) {
   try {
     const res = await fetch(`http://localhost:3000/api/jobs/${id}`);
     const job = await res.json();
-    
+
     if (!job) {
       return { props: { job: null } };
     }
@@ -53,7 +105,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         job: null,
-        error: 'Failed to load job.',
+        error: "Failed to load job.",
       },
     };
   }

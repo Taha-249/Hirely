@@ -10,6 +10,7 @@ export async function getAllJobs(page = 1, limit = 10) {
 
   const skip = (pageNumber - 1) * limitNumber;
 
+  const totalJobs = await db.collection('Jobs').countDocuments();
   const jobs = await db
     .collection('Jobs')
     .find({})
@@ -17,7 +18,7 @@ export async function getAllJobs(page = 1, limit = 10) {
     .limit(limitNumber) 
     .toArray();
   
-  return jobs;
+  return { jobs, totalJobs };
 }
 
 export async function createJob(jobData) {

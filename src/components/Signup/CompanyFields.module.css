@@ -1,0 +1,107 @@
+/* General Styles */
+.inputGroup {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Label Styling */
+.inputGroup label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* Input Fields Styling */
+.input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #333;
+  width: 100%;
+  margin-bottom: 10px;
+  transition: border 0.3s;
+}
+
+/* Focus Effect */
+.input:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+/* Textarea Specific Styling */
+textarea.input {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  textarea.input {
+    min-height: 100px;
+  }
+}
+
+/* Input Group for company title, description, and location */
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+}
+
+.inputGroup input::placeholder,
+.inputGroup textarea::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Container Styling */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.container .inputGroup {
+  margin-bottom: 20px;
+}
+
+/* Button or submit area (if needed) */
+.button {
+  padding: 12px 24px;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+/* Input border highlight on focus */
+.input:focus {
+  border-color: #3b82f6;
+}

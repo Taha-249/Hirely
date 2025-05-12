@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import JobCard from '@/src/components/jobcard';
+import JobCard from '@/src/components/jobCard';
 import styles from '@/styles/CompanyJobPage.module.css';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());

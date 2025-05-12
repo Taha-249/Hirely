@@ -1,25 +1,21 @@
-const companies = [
-    { id: '1', name: 'TechCorp', industry: 'Software', location: 'NYC', description: 'We build scalable software.' },
-    { id: '2', name: 'HealthHub', industry: 'Healthcare', location: 'San Francisco', description: 'Revolutionizing health.' },
-    // more companies...
-  ];
-  
-  export default function handler(req, res) {
-    res.status(200).json(companies);
-  }
-  
-
-  // pages/api/companies/index.js
-/*import clientPromise from '@/src/helpers/mongodb/connect';
+import { getAllCompanies, createCompany } from '@/src/helpers/mongodb/companyService';
 
 export default async function handler(req, res) {
   try {
-    const client = await clientPromise;
-    const db = client.db();
-    const companies = await db.collection('companies').find({}).toArray();
-    res.status(200).json(companies);
+    if (req.method === 'GET') {
+      const { page, limit } = req.query;
+      const data = await getAllCompanies(page, limit);
+      res.status(200).json(data);
+    } else if (req.method === 'POST') {
+      const companyData = req.body;
+      const newCompany = await createCompany(companyData);
+      res.status(201).json(newCompany);
+    } else {
+      res.setHeader('Allow', ['GET', 'POST']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
+    }
   } catch (error) {
-    console.error('Error fetching companies:', error);
-    res.status(500).json({ error: 'Internal Server Error' }); 
+    console.error('Error in companies handler:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
-}*/
+}

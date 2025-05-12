@@ -1,64 +1,89 @@
-/* jobcard.module.css */
 .card {
-    border-radius: 1rem;
-    padding: 1.5rem;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .card:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  
-  .header h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #2d3748; /* Dark Gray */
-  }
-  
-  .header p {
-    font-size: 0.875rem;
-    color: #4a5568; /* Lighter Gray */
-  }
-  
-  .status {
-    font-size: 0.875rem;
-    padding: 0.25rem 0.5rem;
-    background-color: #feb2b2;
-    color: #e53e3e;
-    border-radius: 0.375rem;
-  }
-  
-  .details {
-    margin-top: 1rem;
-  }
-  
-  .details p {
-    font-size: 0.875rem;
-    color: #718096; /* Medium Gray */
-  }
-  
-  .button-container {
-    margin-top: 1.25rem;
-  }
-  
-  .button {
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-    background-color: #3182ce;
-    color: white;
-    border-radius: 0.375rem;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #2b6cb0;
-  }
-  
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.jobTitle {
+  flex: 1;
+}
+
+.jobTitle h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.jobTitle p {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.jobTypeAndSalary {
+  text-align: right;
+  font-size: 1rem;
+  color: #333;
+}
+
+.tags {
+  margin-top: 10px;
+}
+
+.tag {
+  background-color: #9b4de7; /* Purple color */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  margin-right: 8px;
+}
+
+.separator {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.jobMessage {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}

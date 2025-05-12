@@ -1,5 +1,5 @@
 // pages/companies/[id]/jobs.js
-import JobCard from '@/src/components/jobcard';
+import JobCard from '@/src/components/jobCard';
 import styles from '@/styles/CompanyJobs.module.css';
 
 export default function CompanyJobsPage({ jobs }) {

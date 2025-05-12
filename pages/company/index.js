@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import JobCard from '@/src/components/jobcard';
+import JobCard from '@/src/components/jobCard';
 import styles from '@/styles/CompanyDashboard.module.css';
 
 export default function CompanyDashboard({ jobs }) {

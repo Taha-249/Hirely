@@ -1,0 +1,38 @@
+.inputGroup {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #333;
+  width: 100%;
+  cursor: pointer;
+}
+
+.select:focus {
+  border-color: #5b9bd5;
+  outline: none;
+}
+
+.select option {
+  font-size: 16px;
+}
+
+/* Optional: Add styling for the container */
+.inputGroup label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.select:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}

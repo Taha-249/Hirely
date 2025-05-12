@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import JobFilter from "@/src/components/JobFilter";
-import JobCard from "@/src/components/jobcard";
+import JobCard from "@/src/components/jobCard";
 import styles from "@/styles/filterjobs.module.css";
 
 export default function FilterJobsPage() {

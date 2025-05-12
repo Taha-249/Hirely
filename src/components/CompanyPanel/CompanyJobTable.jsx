@@ -2,7 +2,7 @@ import React from 'react';
 import DeleteButton from './DeleteButton';
 import CloseToggle from './CloseToggle';
 import EditModal from './EditModal';
-import JobCard from '../jobcard';
+import JobCard from '../jobCard';
 import styles from '@/src/styles/CompanyJobTable.module.css';
 
 export default function CompanyJobTable({ jobs }) {

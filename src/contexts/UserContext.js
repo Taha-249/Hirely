@@ -7,14 +7,9 @@ const defaultContext = {
   userId: null,
   name: null,
   email: null,
-  degreeOrField: null,
-  experienceLevel: null,    // "fresher" | "junior" | "mid" | "senior" | "lead"
-  preferredJobTypes: [],
-  skills: [],
-  location: null,
-  interests: [],
   authToken: null,
   setUserContext: () => {},
+  clearUserContext: () => {},
 };
 
 const UserContext = createContext(defaultContext);
@@ -27,10 +22,16 @@ export const UserProvider = ({ children }) => {
       ...prev,
       ...data,
     }));
+    localStorage.setItem("user", JSON.stringify(data))
+  };
+
+  const clearUserContext = () => {
+    setUserContextState(defaultContext);
+    localStorage.removeItem("user")
   };
 
   return (
-    <UserContext.Provider value={{ ...userContext, setUserContext }}>
+    <UserContext.Provider value={{ ...userContext, setUserContext, clearUserContext }}>
       {children}
     </UserContext.Provider>
   );

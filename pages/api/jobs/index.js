@@ -4,8 +4,8 @@ export default async function handler(req, res) {
   try {
     if (req.method === 'GET') {
       const { page = 1, limit = 10 } = req.query;
-      const jobs = await getAllJobs(page, limit);
-      return res.status(200).json(jobs);
+      const {jobs, totalJobs } = await getAllJobs(page, limit);
+      return res.status(200).json({jobs, totalJobs});
     }
 
     if (req.method === 'POST') {
