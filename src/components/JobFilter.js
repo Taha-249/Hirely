@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./jobFilter.module.css";
 
-export default function JobFilter({ onFilterChange }) {
+export default function JobFilter({ onFilterChange, onApply }) {
   const [filters, setFilters] = useState({
     jobTypes: [],
     workMode: [],
@@ -22,11 +22,8 @@ export default function JobFilter({ onFilterChange }) {
     });
   };
 
-  const handleSalaryChange = (e) => {
-    const value = parseInt(e.target.value);
-    const newFilters = { ...filters, salary: value };
-    setFilters(newFilters);
-    onFilterChange?.(newFilters);
+  const handleApplyClick = () => {
+    onApply();
   };
 
   return (
@@ -34,7 +31,7 @@ export default function JobFilter({ onFilterChange }) {
       <h2 className={styles.title}>Filter Jobs</h2>
       <div className={styles.filterSection}>
         <h4 className={styles.filterSectionTitle}>Job Type</h4>
-        {["Full Time", "Part Time", "Contract", "Internship"].map((type) => (
+        {["Full-Time", "Part-Time", "Contract", "Internship"].map((type) => (
           <label key={type} className={styles.filterLabel}>
             <input
               type="checkbox"
@@ -64,7 +61,7 @@ export default function JobFilter({ onFilterChange }) {
 
       <div className={styles.filterSection}>
         <h4 className={styles.filterSectionTitle}>Experience Level</h4>
-        {["Entry", "Mid", "Senior"].map((level) => (
+        {["Fresher", "Junior", "Mid", "Senior", "Lead"].map((level) => (
           <label key={level} className={styles.filterLabel}>
             <input
               type="checkbox"
@@ -76,20 +73,7 @@ export default function JobFilter({ onFilterChange }) {
           </label>
         ))}
       </div>
-
-      <div className={styles.filterSection}>
-        <h4 className={styles.filterSectionTitle}>Max Salary</h4>
-        <input
-          type="range"
-          min="20000"
-          max="200000"
-          step="1000"
-          value={filters.salary}
-          onChange={handleSalaryChange}
-          className={styles.rangeInput}
-        />
-        <p className={styles.rangeValue}>${filters.salary.toLocaleString()}</p>
-      </div>
+      <button onClick={handleApplyClick} className={styles.Button}>Apply Filters</button>
     </div>
   );
 }

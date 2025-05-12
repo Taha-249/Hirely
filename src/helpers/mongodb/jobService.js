@@ -1,21 +1,39 @@
 import clientPromise from './connect';
 import { ObjectId } from 'mongodb';
 
-export async function getAllJobs(page = 1, limit = 10) {
+export async function getAllJobs(page = 1, limit = 10, search = '', jobTypes = [], workMode = [], experience = [],) {
   const client = await clientPromise;
-  const db = client.db(); // uses DB from connection string
+  const db = client.db();
   
   const pageNumber = parseInt(page, 10) || 1;
   const limitNumber = parseInt(limit, 10) || 10;
-
+  
   const skip = (pageNumber - 1) * limitNumber;
+  const query = { isOpen: true };
+  if (search) {
+      query.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { company: { $regex: search, $options: "i" } },
+        { category: { $regex: search, $options: "i" } },
+      ];
+    }
+  if (jobTypes?.length) {
+    query.jobType = { $in: jobTypes };
+  }
 
-  const totalJobs = await db.collection('Jobs').countDocuments();
+  if (workMode?.length) {
+    query.work_mode = { $in: workMode };
+  }
+
+  if (experience?.length) {
+    query.exp_level = { $in: experience };
+  }
+  const totalJobs = await db.collection('Jobs').countDocuments(query);
   const jobs = await db
     .collection('Jobs')
-    .find({})
-    .skip(skip) 
-    .limit(limitNumber) 
+    .find(query)
+    .skip(skip)
+    .limit(limitNumber)
     .toArray();
   
   return { jobs, totalJobs };

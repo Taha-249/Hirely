@@ -3,25 +3,39 @@ import JobCard from "@/src/components/jobCard";
 import styles from "@/styles/AllJobs.module.css";
 import JobFilter from "@/src/components/JobFilter";
 import Loading from "@/src/components/Loading";
+import SearchBar from "@/src/components/SearchBar";
 
 export default function JobsPage({ initialJobs, totalPages }) {
   const [jobs, setJobs] = useState(initialJobs);
   const [page, setPage] = useState(1);
+  const [totalpage, setTotalPage] = useState(totalPages);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState({
+    jobTypes: [],
+    workMode: [],
+    experience: [],
+    salary: 100000,
+  });
 
-  const fetchJobs = async (pageNumber) => {
+  const fetchJobs = async (pageNumber, currentSearchTerm = '', currentFilters = filters) => {
     setLoading(true);
     try {
       const queryParams = new URLSearchParams({
         page: pageNumber,
         limit: 10,
+        search: currentSearchTerm,
+        jobTypes: currentFilters.jobTypes.join(','),
+        workMode: currentFilters.workMode.join(','),
+        experience: currentFilters.experience.join(','),
       }).toString();
-
+      console.log(queryParams)
       const res = await fetch(`/api/jobs?${queryParams}`);
       if (!res.ok) throw new Error("Failed to fetch jobs");
 
       const data = await res.json();
       setJobs(data.jobs);
+      setTotalPage( Math.ceil(data.totalJobs / 10)) //10 limit per pages
     } catch (err) {
       console.error("Error loading jobs:", err);
     } finally {
@@ -41,14 +55,20 @@ export default function JobsPage({ initialJobs, totalPages }) {
     }
   };
 
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+    setPage(1); // reset to first page when filters change
+  };
+
   useEffect(() => {
-    fetchJobs(page);
+    fetchJobs(page, searchTerm, filters);
   }, [page]);
 
   return (
     <div className={styles.PageWrapper}>
       <div className={styles.LeftSideBar}>
-        <JobFilter />
+        <SearchBar term={searchTerm} onTermChange={setSearchTerm}/>
+        <JobFilter onFilterChange={handleFilterChange} onApply={() => {setPage(1); fetchJobs(page, searchTerm, filters)}} />
       </div>
 
       <div className={styles.CentreContent}>
@@ -62,7 +82,7 @@ export default function JobsPage({ initialJobs, totalPages }) {
             Previous
           </button>
           <span>
-            Page {page} of {totalPages}
+            Page {page} of {totalpage}
           </span>
           <button
             className={styles.pageButton}
@@ -78,7 +98,7 @@ export default function JobsPage({ initialJobs, totalPages }) {
         ) : (
           <>
             {loading ? (
-              <Loading/>
+              <Loading />
             ) : (
               <>
                 <div className={styles.jobCardsContainer}>
@@ -96,7 +116,7 @@ export default function JobsPage({ initialJobs, totalPages }) {
                     Previous
                   </button>
                   <span>
-                    Page {page} of {totalPages}
+                    Page {page} of {totalpage}
                   </span>
                   <button
                     className={styles.pageButton}

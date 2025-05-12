@@ -12,12 +12,10 @@ export default function JobDetails({ job, error }) {
     return <div className={styles.notFound}>Job not found.</div>;
   }
 
-  const handleToggleView = () => {
-    setShowDescription((prevState) => !prevState);
-  };
-
   return (
     <div className={styles.PageWrapper}>
+      <div className={styles.LeftSideBar}></div>
+      <div className={styles.CentreContent}>
         <div className={styles.card}>
           <div className={styles.header}>
             <h1 className={styles.title}>{job.title}</h1>
@@ -63,10 +61,27 @@ export default function JobDetails({ job, error }) {
             )}
           </div>
 
-          <div className={styles.toggleButtons}>
-            <button onClick={handleToggleView} className={styles.toggleButton}>
-              {showDescription ? "Show Details" : "Show Description"}
-            </button>
+          <div className={styles.buttonOptions}>
+            <div className={`${styles.toggleButton} ${showDescription ? styles.selectedButton : ''}`}>
+              <button
+                onClick={() => {
+                  setShowDescription(true);
+                }}
+                className={styles.toggleButton}
+              >
+                {"Show Description"}
+              </button>
+            </div>
+             <div className={`${styles.toggleButton} ${!showDescription ? styles.selectedButton : ''}`}>
+              <button
+                onClick={() => {
+                  setShowDescription(false);
+                }}
+                className={styles.toggleButton}
+              >
+                {"Show Details"}
+              </button>
+            </div>
           </div>
 
           {showDescription ? (
@@ -86,6 +101,7 @@ export default function JobDetails({ job, error }) {
           )}
         </div>
       </div>
+    </div>
   );
 }
 

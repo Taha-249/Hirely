@@ -6,6 +6,9 @@
   border-radius: 15px;
   width: 100%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding-left: 20%;
 }
 
 .filterSection {
@@ -45,4 +48,21 @@
 
 .title {
   color: var(--color-text-primary)
+}
+
+.Button {
+  padding: 10px 20px;
+  background-color: #28a745; /* Bootstrap-like green */
+  color: white;
+  border: 2px solid #28a745;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 80%;
+}
+
+.Button:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
 }
