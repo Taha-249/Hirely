@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import JobCard from "@/src/components/jobCard";
 import styles from "@/styles/AllJobs.module.css";
 import JobFilter from "@/src/components/JobFilter";
+import Loading from "@/src/components/Loading";
 
 export default function JobsPage({ initialJobs, totalPages }) {
   const [jobs, setJobs] = useState(initialJobs);
@@ -77,7 +78,7 @@ export default function JobsPage({ initialJobs, totalPages }) {
         ) : (
           <>
             {loading ? (
-              <p>Loading jobs...</p>
+              <Loading/>
             ) : (
               <>
                 <div className={styles.jobCardsContainer}>

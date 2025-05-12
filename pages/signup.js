@@ -27,6 +27,8 @@ export default function SignupForm() {
   const [companyDescription, setCompanyDescription] = useState("");
   const [companyLocation, setCompanyLocation] = useState("");
 
+  const [error, setError] = useState("");
+
   const ctx = useUserContext()
 
   const handleCheckbox = (value, state, setter) => {
@@ -66,25 +68,24 @@ export default function SignupForm() {
     });
 
     const data = await res.json();
-
     if (res.ok) {
       ctx.setUserContext({
-        role: data.role,
-        userId: data.userId,
-        name: data.name,
-        email: data.email,
-        authToken: data.authToken,
+        role: data.user.role,
+        userId: data.user.userId,
+        name: data.user.name,
+        email: data.user.email,
+        authToken: data.user.authToken,
       });
-      alert("Signup successful!");
       router.push("/");
     } else {
-      alert(data.message || "Signup failed.");
+      setError(data.message);
     }
   }
   return (
     <div className={styles.PageWrapper}>
       <form onSubmit={handleSubmit} className={styles.container}>
         <h2 className={styles.title}>Sign Up</h2>
+        {error && <div className={styles.error}>{error}</div>}
 
         <div className={styles.inputGroup}>
           <input

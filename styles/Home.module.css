@@ -1,5 +1,6 @@
 .container {
-  min-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
   background: linear-gradient(to right, #0f0f0f, #1a1a1a);
   color: #ffffff;
   display: flex;

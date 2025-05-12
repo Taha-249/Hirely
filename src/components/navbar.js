@@ -16,9 +16,10 @@ export default function Navbar({ title, options }) {
             {options &&
               options.map((option, ind) => (
                 <li key={ind}>
-                  <Link href={`/${option.link}`} className={styles.menuLink}>
+                  {(option.link || option.link === "") ? <Link href={`/${option.link}`} className={styles.menuLink}>
                     {option.title}
-                  </Link>
+                  </Link>:
+                  <button onClick={option.onClick} className={styles.menuButton}>{option.title}</button>}
                 </li>
               ))}
           </ul>

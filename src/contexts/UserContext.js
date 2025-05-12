@@ -1,6 +1,4 @@
-"use client";
-
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const defaultContext = {
   role: null,               // "user" | "company" | "admin"
@@ -17,12 +15,21 @@ const UserContext = createContext(defaultContext);
 export const UserProvider = ({ children }) => {
   const [userContext, setUserContextState] = useState(defaultContext);
 
+  useEffect(() => {
+    const stored = localStorage.getItem("user");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      setUserContextState((prev) => ({ ...prev, ...parsed }));
+    }
+  }, []);
+
   const setUserContext = (data) => {
     setUserContextState((prev) => ({
       ...prev,
       ...data,
     }));
     localStorage.setItem("user", JSON.stringify(data))
+    localStorage.setItem("token", "yes")
   };
 
   const clearUserContext = () => {

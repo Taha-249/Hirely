@@ -1,29 +1,11 @@
 import "@/styles/globals.css";
 import { UserProvider } from "@/src/contexts/UserContext";
-import Navbar from "@/src/components/navbar";
+import NavbarWrapper from "@/src/components/NavbarWrapper";
 
 export default function App({ Component, pageProps }) {
-  const options = [
-    {
-      link: "jobs",
-      title: "Look for Jobs",
-    },
-    {
-      link: "companies",
-      title: "Explore Companies",
-    },
-    {
-      link: "login",
-      title: "Log in",
-    },
-    {
-      link: "signup",
-      title: "Create an Account",
-    },
-  ];
   return (
     <UserProvider>
-        <Navbar title="Hirely" options={options}/>
+      <NavbarWrapper/>
       <div className="wrapper">
         <Component {...pageProps} />
       </div>
